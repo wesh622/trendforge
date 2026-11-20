@@ -1,0 +1,93 @@
+{
+  "libx264": {
+    "ok": true,
+    "secondes": [
+      43.3
+    ],
+    "pic_mo": 2351,
+    "erreur": "",
+    "sortie": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_name": "aac",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "75.000000"
+      }
+    }
+  },
+  "h264_qsv": {
+    "ok": false,
+    "secondes": [
+      0.9
+    ],
+    "pic_mo": 1095,
+    "erreur": [
+      "[h264_qsv @ 0x5641910083c0] Current pixel format is unsupported",
+      "[h264_qsv @ 0x5641910083c0] some encoding parameters are not supported by the QSV runtime. Please double check the input parameters.",
+      "Error initializing output stream 0:0 -- Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height"
+    ],
+    "sortie": null
+  },
+  "h264_vaapi": {
+    "ok": true,
+    "secondes": [
+      37.6
+    ],
+    "pic_mo": 1947,
+    "erreur": "",
+    "sortie": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_name": "aac",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "75.000000"
+      }
+    }
+  },
+  "moviepy": {
+    "ok": true,
+    "secondes": [
+      975.5
+    ],
+    "pic_mo": 8429,
+    "sortie": {
+      "programs": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1920,
+          "r_frame_rate": "30/1"
+        },
+        {
+          "codec_name": "aac",
+          "r_frame_rate": "0/0"
+        }
+      ],
+      "format": {
+        "duration": "75.000000"
+      }
+    }
+  },
+  "ratio_moviepy_sur_ffmpeg": 22.53
+}

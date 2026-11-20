@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--
+  Prototype « vidéo en HTML » — recette faits-etonnants.
+  Règle : tout l'affichage est une fonction pure du temps, dessiner(t).
+  Aucune animation CSS ni setTimeout : le moteur de capture appelle dessiner(t)
+  pour chaque image (30 i/s), ce qui garantit un rendu identique et calé sur la voix.
+  window.DATA est injecté par proto_html.py : {duree, mots:[{w,d,f}], scenes:[{type,debut,fin,...}]}
+-->
+<style>
+  :root { --fond1:#0d0b1f; --fond2:#2a1458; --accent:#ffd23f; --vert:#3ddc84; --rouge:#ff4d6d; --texte:#fff; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:var(--fond1);
+    font-family:"Ubuntu","Liberation Sans",sans-serif; color:var(--texte); }
+  #fond { position:absolute; inset:0; }
+  .couche { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:flex-start; padding-top:520px; opacity:0; }
+  .gros { font-size:150px; font-weight:700; line-height:1; text-align:center; }
+  .moyen { font-size:76px; font-weight:700; text-align:center; line-height:1.1; padding:0 80px; }
+  .emoji { font-family:"Noto Color Emoji"; font-size:300px; line-height:1; }
+  .badge { position:absolute; top:330px; left:0; right:0; margin:0 auto; width:fit-content; font-size:64px; font-weight:700; padding:18px 44px;
+    border-radius:60px; background:var(--accent); color:#1a1033; }
+  .carte { display:flex; align-items:center; gap:40px; font-size:80px; font-weight:700;
+    background:rgba(255,255,255,.08); border-radius:40px; padding:30px 60px; margin:22px 0; }
+  .carte .e { font-family:"Noto Color Emoji"; font-size:130px; }
+  .marque { font-size:90px; width:120px; text-align:center; }
+  #sous { position:absolute; left:0; right:0; top:1330px; text-align:center; font-size:96px;
+    font-weight:700; text-transform:uppercase; letter-spacing:1px;
+    text-shadow:0 6px 0 #000, 0 0 30px rgba(0,0,0,.7); }
+  #sous span { display:inline-block; margin:0 14px; }
+  #barre { position:absolute; top:200px; left:50%; transform:translateX(-50%); display:flex; gap:24px; }
+  #barre div { width:150px; height:14px; border-radius:7px; background:rgba(255,255,255,.2); overflow:hidden; }
+  #barre i { display:block; height:100%; background:var(--accent); width:0; }
+</style>
+</head>
+<body>
+<canvas id="fond" width="1080" height="1920"></canvas>
+<div id="barre"><div><i></i></div><div><i></i></div><div><i></i></div></div>
+
+<div class="couche" id="hook">
+  <div class="gros" id="hook-n" style="font-size:420px;color:var(--accent)">3</div>
+  <div class="moyen" id="hook-t1">FACTS THAT SOUND FAKE</div>
+  <div class="moyen" id="hook-t2" style="color:var(--vert)">…BUT ARE TRUE</div>
+</div>
+
+<div class="couche" id="f1">
+  <div class="badge">FACT #1</div>
+  <div class="emoji" id="f1-e">🐙</div>
+  <div id="f1-coeurs" style="display:flex;gap:30px;margin-top:40px">
+    <span class="emoji" style="font-size:170px">❤️</span>
+    <span class="emoji" style="font-size:170px">❤️</span>
+    <span class="emoji" style="font-size:170px">❤️</span>
+  </div>
+</div>
+
+<div class="couche" id="f2">
+  <div class="badge">FACT #2</div>
+  <div class="carte" id="f2-a"><span class="e">🍌</span><span>BERRY</span><span class="marque" style="color:var(--vert)">✔</span></div>
+  <div class="carte" id="f2-b"><span class="e">🍓</span><span>BERRY</span><span class="marque" style="color:var(--rouge)">✘</span></div>
+</div>
+
+<div class="couche" id="f3">
+  <div class="badge">FACT #3</div>
+  <div class="emoji" id="f3-e" style="font-size:230px">🍯</div>
+  <div class="gros" id="f3-n" style="color:var(--accent);margin-top:30px">0</div>
+  <div class="moyen" style="font-size:64px">YEARS OLD · STILL EDIBLE</div>
+</div>
+
+<div class="couche" id="cta">
+  <div class="moyen" id="cta-t" style="font-size:110px">WHICH ONE DID YOU KNOW?</div>
+  <div style="display:flex;gap:40px;margin-top:80px" id="cta-e">
+    <span class="emoji" style="font-size:160px">🐙</span>
+    <span class="emoji" style="font-size:160px">🍌</span>
+    <span class="emoji" style="font-size:160px">🍯</span>
+  </div>
+</div>
+
+<div id="sous"></div>
+
+<script>
+const D = window.DATA;
+const $ = id => document.getElementById(id);
+const clamp = (x, a=0, b=1) => Math.min(b, Math.max(a, x));
+const prog = (t, a, d) => clamp((t - a) / d);                 // 0→1 entre a et a+d
+const sortie = x => 1 - Math.pow(1 - x, 3);                     // easeOutCubic
+const rebond = x => { const c = 1.70158 * 1.5; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const scene = type => D.scenes.find(s => s.type === type);
+
+// Fond : dégradé qui respire + particules déterministes (pseudo-aléatoire à graine fixe)
+const ctx = $("fond").getContext("2d");
+const P = Array.from({length: 40}, (_, i) => {
+  const r = k => { const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); };
+  return {x: r(1) * 1080, y: r(2) * 1920, v: 20 + r(3) * 60, s: 2 + r(4) * 5, a: .15 + r(5) * .35};
+});
+function fond(t) {
+  const g = ctx.createRadialGradient(540, 800 + Math.sin(t * .6) * 120, 100, 540, 960, 1300);
+  g.addColorStop(0, "#3b1d7a"); g.addColorStop(1, "#0d0b1f");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 1920);
+  for (const p of P) {
+    const y = (p.y - t * p.v) % 1920, yy = y < 0 ? y + 1920 : y;
+    ctx.globalAlpha = p.a; ctx.fillStyle = "#ffd23f";
+    ctx.beginPath(); ctx.arc(p.x, yy, p.s, 0, 6.283); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+}
+
+// Couche visible : fondu entrant/sortant de 0,25 s, + « zoom punch » à l'entrée
+function couche(id, s, t) {
+  const el = $(id);
+  const o = Math.min(prog(t, s.debut, .25), 1 - prog(t, s.fin - .2, .2));
+  const z = 1 + .12 * (1 - sortie(prog(t, s.debut, .35)));
+  el.style.opacity = o;
+  el.style.transform = `scale(${z})`;
+  return o > 0;
+}
+
+function pop(el, t, a, d=.35) {           // apparition élastique
+  const x = prog(t, a, d);
+  el.style.opacity = clamp(x * 3);
+  el.style.transform = `scale(${x === 0 ? 0 : rebond(x)})`;
+}
+
+// Moment où un mot est prononcé (horodatage voix) → les animations suivent la voix
+function quand(mot, apres = 0) {
+  const m = D.mots.find((m, i) => i >= apres && m.w.toLowerCase().replace(/[^a-z0-9]/g, "") === mot);
+  return m ? m.d : 0;
+}
+
+function sousTitres(t) {
+  // 2 mots à l'écran, le mot en cours en jaune avec un petit rebond
+  let i = D.mots.findIndex(m => t >= m.d && t < m.f + .15);
+  if (i < 0) { $("sous").innerHTML = ""; return; }
+  const debutGroupe = i - (i % 2);
+  const groupe = D.mots.slice(debutGroupe, debutGroupe + 2);
+  $("sous").innerHTML = groupe.map((m, k) => {
+    const actif = debutGroupe + k === i;
+    const z = actif ? 1 + .15 * (1 - sortie(prog(t, m.d, .15))) : 1;
+    return `<span style="color:${actif ? "var(--accent)" : "#fff"};transform:scale(${z})">${m.w.replace(/[.,!?]/g, "")}</span>`;
+  }).join("");
+}
+
+window.dessiner = function (t) {
+  fond(t);
+
+  const h = scene("hook");
+  if (couche("hook", h, t)) {
+    pop($("hook-n"), t, h.debut);
+    pop($("hook-t1"), t, quand("facts"), .3);
+    pop($("hook-t2"), t, quand("but"), .3);
+  }
+
+  const f1 = scene("fait1");
+  if (couche("f1", f1, t)) {
+    pop($("f1-e"), t, f1.debut);
+    const coeurs = $("f1-coeurs").children, a = quand("hearts");
+    for (let k = 0; k < 3; k++) pop(coeurs[k], t, a - .35 + k * .18, .3);
+  }
+
+  const f2 = scene("fait2");
+  if (couche("f2", f2, t)) {
+    pop($("f2-a"), t, quand("bananas"), .35);
+    pop($("f2-b"), t, quand("strawberries"), .35);
+  }
+
+  const f3 = scene("fait3");
+  if (couche("f3", f3, t)) {
+    pop($("f3-e"), t, f3.debut);
+    const x = sortie(prog(t, f3.debut + .3, 1.6));
+    $("f3-n").textContent = Math.round(3000 * x).toLocaleString("en-US");
+  }
+
+  const c = scene("cta");
+  if (couche("cta", c, t)) {
+    pop($("cta-t"), t, c.debut);
+    [...$("cta-e").children].forEach((e, k) => pop(e, t, c.debut + .3 + k * .15, .3));
+  }
+
+  // Barre de progression des 3 faits
+  ["fait1", "fait2", "fait3"].forEach((type, k) => {
+    const s = scene(type);
+    $("barre").children[k].firstChild.style.width = (100 * prog(t, s.debut, s.fin - s.debut)) + "%";
+  });
+  $("barre").style.opacity = t > f1.debut - .2 && t < c.debut ? 1 : 0;
+
+  sousTitres(t);
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+[
+  {
+    "etape": "voix",
+    "audio_s": 52.6,
+    "secondes": 107.3,
+    "temps_reel": 2.04,
+    "pic_mo": 353,
+    "total_avec_import_s": 107.3
+  },
+  {
+    "etape": "horodatage",
+    "mots": 180,
+    "mots_attendus": 184,
+    "secondes": 118.3,
+    "pic_mo": 1033
+  }
+]

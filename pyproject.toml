@@ -1,0 +1,45 @@
+[project]
+name = "trendforge"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Omar Eddaoui", email = "Omar Eddaoui" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "anthropic>=2.11.0",
+    "fastembed>=0.7.4",
+    "faster-whisper>=1.2.1",
+    "feedparser>=6.0.14",
+    "httpx>=0.28.1",
+    "imagehash>=4.3.2",
+    "keyring>=25.7.0",
+    "kokoro-onnx>=0.6.1",
+    "librosa>=0.11.0",
+    "nicegui>=3.19.0",
+    "pillow>=11.3.0",
+    "psutil>=7.2.2",
+    "pydantic>=2.14.4",
+    "rapidocr-onnxruntime>=1.4.4",
+    "rich>=15.0.0",
+    "scenedetect[opencv-headless]>=0.7.3",
+    "soundfile>=0.14.0",
+    "typer>=0.29.1",
+    "yt-dlp[curl-cffi]>=2026.10.21",
+]
+
+[project.scripts]
+trendforge = "trendforge:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+bench = [
+    "moviepy>=2,<3",
+    "playwright>=1.65.2",
+]
+dev = [
+    "pytest>=9.2.0",
+]

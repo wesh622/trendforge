@@ -1,0 +1,211 @@
+{
+ "recIdStr": "6670862985555706304",
+ "trends": [
+  {
+   "topic": "29030774f525",
+   "displayName": "Epstein files release",
+   "description": "Millions of Justice Department documents tied to Jeffrey Epstein renew demands for accountability.",
+   "link": "/profile/did:plc:qrz3lhbyuxbeilrc6nekdqme/feed/29030774f525",
+   "startedAt": "2026-11-14T02:04:21.874588+00:00",
+   "postCount": 894,
+   "status": "trending",
+   "category": "politics",
+   "actors": [
+    {
+     "did": "did:plc:bbcadk2q4r2foe3qq2kul2ui",
+     "handle": "inthelou.bsky.social",
+     "displayName": "",
+     "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:bbcadk2q4r2foe3qq2kul2ui/bafkreieyrxzbzhjwdqbv2roxc2br7gu7yjznn6rluetrblytdbdyx4v2a4",
+     "associated": {
+      "activitySubscription": {
+       "allowSubscriptions": "followers"
+      }
+     },
+     "labels": [],
+     "createdAt": "2024-11-14T05:42:08.786Z"
+    }
+   ]
+  },
+  {
+   "topic": "c05e41c595d2",
+   "displayName": "Army to detonate lead explosives in Iowa",
+   "description": "The U.S. Army plans to blow up aging lead azide at a Middletown plant, raising contamination fears.",
+   "link": "/profile/did:plc:qrz3lhbyuxbeilrc6nekdqme/feed/c05e41c595d2",
+   "startedAt": "2026-11-18T00:54:19.608750+00:00",
+   "postCount": 1775,
+   "status": "saturating",
+   "category": "politics",
+   "actors": [
+    {
+     "did": "did:plc:3le7dvxqc2rhvyswiida2cgf",
+     "handle": "chanda.blacksky.app",
+     "displayName": "Chanda Prescod-Weinstein 🌌",
+     "pronouns": "she/they",
+     "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:3le7dvxqc2rhvyswiida2cgf/bafkreibqix465sgmrwxxm2jkttuydwutxczmq6uumlhbc46wnmcynqyuti",
+     "associated": {
+      "chat": {
+       "allowIncoming": "following"
+      },
+      "activitySubscription": {
+       "allowSubscriptions": "none"
+      }
+     },
+     "labels": [
+      {
+       "src": "did:plc:3le7dvxqc2rhvyswiida2cgf",
+       "uri": "at://did:plc:3le7dvxqc2rhvyswiida2cgf/app.bsky.actor.profile/self",
+       "cid": "bafyreidg3uvxi4ggjd2si3mj4xpke365ljuuzrurkftl5inywbttlyx55y",
+       "val": "!no-unauthenticated",
+       "cts": "1970-01-01T00:00:00.000Z"
+      }
+     ],
+     "createdAt": "2023-03-26T01:02:17.323Z",
+     "verification": {
+      "verifications": [
+       {
+        "issuer": "did:plc:z72i7hdynmk6r22z27h6tvur",
+        "issuerDisplayName": "Bluesky",
+        "issuerHandle": "bsky.app",
+        "uri": "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.graph.verification/3m2hzw5baci2b",
+        "isValid": true,
+        "createdAt": "2025-10-05T21:25:09.669Z"
+       }
+      ],
+      "verifiedStatus": "valid",
+      "trustedVerifierStatus": "none"
+     }
+    }
+   ]
+  },
+  {
+   "topic": "2c2441c4253f",
+   "displayName": "Death of zoo animal Fiona",
+   "description": "Fans mourn Fiona, a beloved zoo animal, and share sympathy for her grieving zookeepers.",
+   "link": "/profile/did:plc:qrz3lhbyuxbeilrc6nekdqme/feed/2c2441c4253f",
+   "startedAt": "2026-11-18T17:04:23.278278+00:00",
+   "postCount": 649,
+   "status": "cooling",
+   "category": "other",
+   "actors": [
+    {
+     "did": "did:plc:6eneuye2a52t5hbbcaxo7n7h",
+     "handle": "mementomorty.bsky.social",
+     "displayName": "Memento (blohio) Morty 🌙",
+     "pronouns": "she/her",
+     "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:6eneuye2a52t5hbbcaxo7n7h/bafkreiaxmherujvmvjzfn2cjrxaxecevp5ehuhfk64c4pp2u5nui4pmyji",
+     "associated": {
+      "chat": {
+       "allowIncoming": "all",
+       "allowGroupInvites": "none"
+      },
+      "activitySubscription": {
+       "allowSubscriptions": "followers"
+      }
+     },
+     "labels": [
+      {
+       "src": "did:plc:6eneuye2a52t5hbbcaxo7n7h",
+       "uri": "at://did:plc:6eneuye2a52t5hbbcaxo7n7h/app.bsky.actor.profile/self",
+       "cid": "bafyreie7noligpigahu3tm7bh2gazfj5ajttb5njbp35sv356iyk6xv4ji",
+       "val": "!no-unauthenticated",
+       "cts": "1970-01-01T00:00:00.000Z"
+      }
+     ],
+     "createdAt": "2023-12-27T14:30:16.936Z"
+    }
+   ]
+  },
+  {
+   "topic": "9813a0425542",
+   "displayName": "Names parents almost chose",
+   "description": "Users share the baby names they nearly got before one parent firmly vetoed them.",
+   "link": "/profile/did:plc:qrz3lhbyuxbeilrc6nekdqme/feed/9813a0425542",
+   "startedAt": "2026-11-19T11:04:31.031003+00:00",
+   "postCount": 908,
+   "status": "cooling",
+   "category": "culture",
+   "actors": [
+    {
+     "did": "did:plc:3s5wtzqrvrsvbxl6afiko2yw",
+     "handle": "nameshiv.bsky.social",
+     "displayName": "Shiv Ramdas Mens Rice Activist",
+     "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:3s5wtzqrvrsvbxl6afiko2yw/bafkreig3uhue5hbjpwplsurht4abpzu5o4oiqqlwou2giqbdwshmnvgwpm",
+     "associated": {
+      "chat": {
+       "allowIncoming": "following"
+      },
+      "activitySubscription": {
+       "allowSubscriptions": "followers"
+      }
+     },
+     "labels": [
+      {
+       "src": "did:plc:3s5wtzqrvrsvbxl6afiko2yw",
+       "uri": "at://did:plc:3s5wtzqrvrsvbxl6afiko2yw/app.bsky.actor.profile/self",
+       "cid": "bafyreiai25sz7xnpn5vgbndk4zlaaymqcgh7kvzrlp3gaj7davygcxalda",
+       "val": "!no-unauthenticated",
+       "cts": "1970-01-01T00:00:00.000Z"
+      }
+     ],
+     "createdAt": "2023-06-08T20:03:33.350Z",
+     "verification": {
+      "verifications": [
+       {
+        "issuer": "did:plc:z72i7hdynmk6r22z27h6tvur",
+        "issuerDisplayName": "Bluesky",
+        "issuerHandle": "bsky.app",
+        "uri": "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.graph.verification/3mip4kuyf5r2z",
+        "isValid": true,
+        "createdAt": "2026-04-04T20:53:53.992Z"
+       }
+      ],
+      "verifiedStatus": "valid",
+      "trustedVerifierStatus": "none"
+     }
+    }
+   ]
+  },
+  {
+   "topic": "a4c88fc56c85",
+   "displayName": "Ashton Kutcher's firm gains from Anthropic IPO",
+   "description": "The actor's cofounded investment firm reportedly made billions as the AI company went public.",
+   "link": "/profile/did:plc:qrz3lhbyuxbeilrc6nekdqme/feed/a4c88fc56c85",
+   "startedAt": "2026-11-10T12:44:19.192327+00:00",
+   "postCount": 2529,
+   "status": "cooling",
+   "category": "business",
+   "actors": [
+    {
+     "did": "did:plc:qc6xzgctorfsm35w6i3vdebx",
+     "handle": "edzitron.com",
+     "displayName": "Ed Zitron",
+     "avatar": "https://cdn.bsky.app/img/avatar/plain/did:plc:qc6xzgctorfsm35w6i3vdebx/bafkreifumukkr2rhf2taicu7qll56av5q6mvdlt655iozzmwqkdatbe3mi",
+     "associated": {
+      "chat": {
+       "allowIncoming": "all"
+      },
+      "activitySubscription": {
+       "allowSubscriptions": "none"
+      }
+     },
+     "labels": [],
+     "createdAt": "2023-04-25T19:18:06.530Z",
+     "verification": {
+      "verifications": [
+       {
+        "issuer": "did:plc:z72i7hdynmk6r22z27h6tvur",
+        "issuerDisplayName": "Bluesky",
+        "issuerHandle": "bsky.app",
+        "uri": "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.graph.verification/3lsurwobudr26",
+        "isValid": true,
+        "createdAt": "2025-07-01T03:45:20.965Z"
+       }
+      ],
+      "verifiedStatus": "valid",
+      "trustedVerifierStatus": "none"
+     }
+    }
+   ]
+  }
+ ]
+}
